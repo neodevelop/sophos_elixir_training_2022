@@ -14,4 +14,11 @@ defmodule SophosApp.MyList do
       String.contains?(Path.basename(f), "application")
     end)
   end
+
+  def generate(n) when n > 0 do
+    generate(n, [])
+  end
+
+  defp generate(0, list), do: list
+  defp generate(n, list), do: generate(n - 1, [n | list])
 end
