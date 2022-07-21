@@ -1,8 +1,20 @@
 defmodule SophosApp.Math do
+  @moduledoc """
+  Implementación básica del módulo de matemáticas de Sophos
+  """
+
+  @pi 3.1415
+
+  @doc """
+  Suma dos números cualesquiera
+  """
   def sum(a, b) do
     a + b
   end
 
+  @doc """
+  Calcula el Máximo Común Divisor
+  """
   def mcd(a, 0), do: a
   def mcd(a, b), do: mcd(b, rem(a, b))
 
