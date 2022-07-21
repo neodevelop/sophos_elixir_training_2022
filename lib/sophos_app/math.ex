@@ -22,6 +22,8 @@ defmodule SophosApp.Math do
   def kind(0), do: :zero
   def kind(n) when n > 0, do: :positive
 
+  def circumference(r), do: 2 * r * @pi
+
   defmodule Geometry.Rectangle do
     def area(a), do: area(a, a)
     def area(a, b), do: a * b
