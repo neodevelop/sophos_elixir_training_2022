@@ -6,5 +6,13 @@ defmodule SophosApp.Fibonacci do
     sequence(n - 1) + sequence(n - 2)
   end
 
-  # Invocar con Llamada de cola
+  def sequence_with_tail(n) do
+    do_sequence(n, 1, [1, 0])
+  end
+
+  defp do_sequence(n, n, [h | _]), do: h
+
+  defp do_sequence(n, i, [n2, n1 | _t] = l) do
+    do_sequence(n, i + 1, [n1 + n2 | l])
+  end
 end
