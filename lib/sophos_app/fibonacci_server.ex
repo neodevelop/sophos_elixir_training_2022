@@ -7,13 +7,17 @@ defmodule SophosApp.FibonacciServer do
         Fibonacci.sequence(n)
         |> IO.inspect()
 
+        loop()
+
       {:status, msg} ->
         IO.puts("Running #{inspect(msg)}")
+        loop()
 
       message ->
         IO.inspect(message)
-    after
-      1500 -> IO.puts("Se acabó")
+        loop()
+        # after
+        #   1500 -> IO.puts("Se acabó")
     end
   end
 end
