@@ -2,23 +2,23 @@ defmodule SophosApp.FibonacciServer do
   alias SophosApp.Fibonacci
 
   def start() do
-    spawn(__MODULE__, :loop, [0])
+    spawn(__MODULE__, :loop, [{0}])
   end
 
   def start_link() do
-    spawn_link(__MODULE__, :loop, [0])
+    spawn_link(__MODULE__, :loop, [{0}])
   end
 
   def start_monitor() do
-    spawn_monitor(__MODULE__, :loop, [0])
+    spawn_monitor(__MODULE__, :loop, [{0}])
   end
 
-  def loop(state) do
+  def loop({counter} = state) do
     receive do
       {:sequence, caller, n} ->
         result = Fibonacci.sequence(n)
         send(caller, {:fibonacci, n, result})
-        loop(state + 1)
+        loop({counter + 1})
 
       {:status, caller} ->
         send(caller, {:ok, state})
