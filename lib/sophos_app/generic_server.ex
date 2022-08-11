@@ -1,6 +1,7 @@
 defmodule SophosApp.GenericServer do
-  def start(module, caller) do
-    spawn(fn -> loop(module, caller, 0) end)
+  def start(module, caller \\ self()) do
+    Process.flag(:trap_exit, true)
+    spawn_link(fn -> loop(module, caller, init) end)
   end
 
   def loop(module, caller, state) do
