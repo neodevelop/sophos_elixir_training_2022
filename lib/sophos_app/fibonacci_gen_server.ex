@@ -13,6 +13,10 @@ defmodule SophosApp.FibonacciGenServer do
     GenServer.cast(pid, {:sequence, n})
   end
 
+  def crash(pid) do
+    GenServer.call(pid, :crash)
+  end
+
   def status(pid) do
     GenServer.call(pid, :status)
   end
@@ -23,7 +27,12 @@ defmodule SophosApp.FibonacciGenServer do
     {:ok, %{}}
   end
 
-  def handle_call({:sequence, n}, _from, state) do
+  def handle_call(:crash, _from, state) do
+    Process.exit(self(), :kill)
+    {:reply, 0, state}
+  end
+
+  def handle_call({:sequence, n}, _from, state) when n >= 0 do
     result = compute_sequence(n, state)
 
     new_state = Map.put_new(state, n, result)
