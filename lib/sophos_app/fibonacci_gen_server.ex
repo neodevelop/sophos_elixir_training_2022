@@ -6,19 +6,19 @@ defmodule SophosApp.FibonacciGenServer do
   # Client API
 
   def start_link(_) do
-    GenServer.start_link(__MODULE__, %{})
+    GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
-  def compute(pid, n) do
-    GenServer.cast(pid, {:sequence, n})
+  def compute(n) do
+    GenServer.cast(__MODULE__, {:sequence, n})
   end
 
-  def crash(pid) do
-    GenServer.call(pid, :crash)
+  def crash() do
+    GenServer.call(__MODULE__, :crash)
   end
 
-  def status(pid) do
-    GenServer.call(pid, :status)
+  def status() do
+    GenServer.call(__MODULE__, :status)
   end
 
   # Callbacks
