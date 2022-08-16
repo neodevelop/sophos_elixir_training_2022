@@ -3,7 +3,23 @@ defmodule SophosApp.FibonacciGenServer do
 
   alias SophosApp.Fibonacci
 
-  def init(_args) do
+  # Client API
+
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, %{})
+  end
+
+  def compute(pid, n) do
+    GenServer.cast(pid, {:sequence, n})
+  end
+
+  def status(pid) do
+    GenServer.call(pid, :status)
+  end
+
+  # Callbacks
+
+  def init(_arg) do
     {:ok, %{}}
   end
 
