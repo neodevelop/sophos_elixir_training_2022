@@ -40,6 +40,11 @@ defmodule SophosApp.FibonacciGenServer do
     {:noreply, new_state}
   end
 
+  def handle_info(msg, state) do
+    IO.inspect(msg)
+    {:noreply, state}
+  end
+
   defp compute_sequence(n, state) do
     state
     |> Map.fetch(n)
